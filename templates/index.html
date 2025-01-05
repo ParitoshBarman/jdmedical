@@ -70,11 +70,67 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <style>
-        .quicktrackingsec>.totalsalse {
-            width: 350px;
-            height: 250px;
+        .quicktrackingsec {
+            padding: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quicktrackingsec>.quicktrackingcart {
+            width: 250px;
+            height: 150px;
+            /* border: 1px solid green; */
+
+        }
+
+        .quicktrackingsec>.quicktrackingcart>.totalsalse {
+            width: 250px;
+            height: 150px;
+            border-radius: 10px;
+        }
+
+        .quicktrackingsec>.quicktrackingcart>.contentbox {
+            /* transform: translate(102px, -121px); */
+            height: 100%;
+            position: relative;
+            top: -150px;
+            left: 0px;
+            /* border: 1px solid red; */
+            border: 1px solid #e5e7eb;
+            z-index: 5;
+            padding-left: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border-radius: 10px;
+        }
+
+        .quicktrackingsec>.quicktrackingcart>.contentbox>div>h3 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .quicktrackingsec>.quicktrackingcart>.contentbox>div>p {
+            color: #AEB7C0;
+            font-size: 14px;
+            font-weight: 500;
+            padding-top: 2px;
+        }
+
+        .chartsection{
+            margin: 0 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -121,8 +177,82 @@
             </header>
             <div class="chartSec">
                 <div class="quicktrackingsec">
-                    <div class="totalsalse" id="totalsalse"></div>
-                    <p style="position: relative;left: 0;top: 0;">2356</p>
+                    <div class="quicktrackingcart">
+                        <div class="totalsalse" id="totalsalse"></div>
+                        <div class="contentbox">
+                            <div>
+
+                                <i class="fa fa-money"
+                                    style="color: var(--fontcolor);padding: 10px;background-color: rgba(255, 255, 255, 0.359);border-radius: 50%;"></i>
+                            </div>
+                            <div>
+                                <h3>₹ 5000</h3>
+                                <p>Sales</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ******** -->
+                    <div class="quicktrackingcart">
+                        <div class="totalsalse" id="totalexpense"></div>
+                        <div class="contentbox">
+                            <div>
+
+                                <i class="fa fa-money"
+                                    style="color: var(--fontcolor);padding: 10px;background-color: rgba(255, 255, 255, 0.359);border-radius: 50%;"></i>
+                            </div>
+                            <div>
+                                <h3>₹ 2000</h3>
+                                <p>Expence</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ******** -->
+                    <div class="quicktrackingcart">
+                        <div class="totalsalse" id="totalprofit"></div>
+                        <div class="contentbox">
+                            <div>
+
+                                <i class="fa fa-money"
+                                    style="color: var(--fontcolor);padding: 10px;background-color: rgba(255, 255, 255, 0.359);border-radius: 50%;"></i>
+                            </div>
+                            <div>
+                                <h3>₹ 5000</h3>
+                                <p>Profit</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ******** -->
+                    <div class="quicktrackingcart">
+                        <div class="totalsalse" id="totalcustomers"></div>
+                        <div class="contentbox">
+                            <div>
+
+                                <i class="fa fa-user-circle"
+                                    style="color: var(--fontcolor);padding: 10px;background-color: rgba(255, 255, 255, 0.359);border-radius: 50%;"></i>
+                            </div>
+                            <div>
+                                <h3>100</h3>
+                                <p>Customer</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ******** -->
+                </div>
+
+
+                <div class="chartsection">
+                    <div class="salesprofitexpenceCompare" style="min-width: 600px; width: 58%;min-height: 450px;">
+                        <div class="salesprofitexpenceCompareChart" id="salesprofitexpenceCompareChart" style="width: 100%;height: 100%;min-height: 450px;"></div>
+                    </div>
+
+                    <div class="mostusedmadicine" style="min-width: 300px;width: 40%;min-height: 450px;">
+                        <div class="mostusedmadicineChart" id="mostusedmadicineChart" style="width: 100%;height: 100%;min-height: 450px;"></div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -133,73 +263,222 @@
 
 
     <script>
-        google.charts.load('current', { packages: ['corechart', 'line'] });
-        google.charts.setOnLoadCallback(drawBasic);
+        google.charts.load('current', { packages: ['corechart', 'line', 'bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawExpenceChart);
+        google.charts.setOnLoadCallback(drawProfitChart);
+        google.charts.setOnLoadCallback(drawCustomerChart);
+        google.charts.setOnLoadCallback(compereChart);
+        google.charts.setOnLoadCallback(mostusedmadicineChart);
 
-        function drawBasic() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('number', 'X');
-            data.addColumn('number', 'Sales');
 
-            data.addRows([
-                [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
-                [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
-                [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-                [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-                [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-                [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-                [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-                [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-                [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-                [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-                [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-                [66, 70], [67, 72], [68, 75], [69, 80]
+
+        var options = {
+            backgroundColor: 'rgb(36, 48, 63)', // Matches --theamcolor
+            chartArea: {
+                backgroundColor: 'rgb(36, 48, 63)' // Matches --theamcolorlite
+            },
+            hAxis: {
+
+                textStyle: {
+                    color: 'rgb(255, 255, 255)' // Matches --fontcolor
+                },
+                titleTextStyle: {
+                    color: 'rgb(255, 255, 255)' // Matches --fontcolor
+                },
+                gridlines: {
+                    color: 'transparent', // Removes vertical gridlines
+                },
+                textPosition: 'none'
+            },
+            vAxis: {
+
+                textStyle: {
+                    color: 'rgb(255, 255, 255)' // Matches --fontcolor
+                },
+                titleTextStyle: {
+                    color: 'rgb(255, 255, 255)' // Matches --fontcolor
+                },
+                gridlines: {
+                    color: 'transparent', // Removes vertical gridlines
+                },
+                textPosition: 'none'
+            },
+            legend: { position: 'none' }, // Hide the legend
+            colors: ['#ff5722'], // Line and fill color
+            areaOpacity: 0.3, // Opacity for the fill (0.0 to 1.0)
+            chartArea: { width: '99%', height: '99%' },
+            series: {
+                0: { color: '#4caf50' } // Line color (customized to a contrasting theme color)
+            }
+        };
+
+
+        function drawChart() {
+            // Static data for the chart
+            var data = google.visualization.arrayToDataTable([
+                ['Datetime', 'Sales'],
+                [new Date(2025, 0, 1, 9, 0), 50],  // 9:00 AM
+                [new Date(2025, 0, 1, 10, 0), 75], // 10:00 AM
+                [new Date(2025, 0, 1, 11, 0), 60], // 11:00 AM
+                [new Date(2025, 0, 1, 12, 0), 80], // 12:00 PM
+                [new Date(2025, 0, 1, 13, 0), 95], // 1:00 PM
+                [new Date(2025, 0, 1, 14, 0), 100], // 2:00 PM
+                [new Date(2025, 0, 1, 15, 0), 90]   // 3:00 PM
             ]);
 
-            var options = {
-                backgroundColor: 'rgb(26, 34, 44)', // Matches --theamcolor
-                chartArea: {
-                    backgroundColor: 'rgb(36, 48, 63)' // Matches --theamcolorlite
-                },
-                hAxis: {
-
-                    textStyle: {
-                        color: 'rgb(255, 255, 255)' // Matches --fontcolor
-                    },
-                    titleTextStyle: {
-                        color: 'rgb(255, 255, 255)' // Matches --fontcolor
-                    },
-                    gridlines: {
-                        color: 'transparent', // Removes vertical gridlines
-                    },
-                    textPosition: 'none'
-                },
-                vAxis: {
-
-                    textStyle: {
-                        color: 'rgb(255, 255, 255)' // Matches --fontcolor
-                    },
-                    titleTextStyle: {
-                        color: 'rgb(255, 255, 255)' // Matches --fontcolor
-                    },
-                    gridlines: {
-                        color: 'transparent', // Removes vertical gridlines
-                    },
-                    textPosition: 'none'
-                },
-                legend: {
-                    textStyle: {
-                        color: 'rgb(255, 255, 255)' // Matches --fontcolor
-                    }
-                },
-                series: {
-                    0: { color: '#4caf50' } // Line color (customized to a contrasting theme color)
-                }
-            };
 
             var chart = new google.visualization.LineChart(document.getElementById('totalsalse'));
             chart.draw(data, options);
         }
+
+        function drawExpenceChart() {
+
+            // Static data for the chart
+            var data = google.visualization.arrayToDataTable([
+                ['Datetime', 'Expenses'],
+                [new Date(2025, 0, 1, 9, 0), 30],  // 9:00 AM
+                [new Date(2025, 0, 1, 10, 0), 45], // 10:00 AM
+                [new Date(2025, 0, 1, 11, 0), 50], // 11:00 AM
+                [new Date(2025, 0, 1, 12, 0), 60], // 12:00 PM
+                [new Date(2025, 0, 1, 13, 0), 70], // 1:00 PM
+                [new Date(2025, 0, 1, 14, 0), 65], // 2:00 PM
+                [new Date(2025, 0, 1, 15, 0), 75]   // 3:00 PM
+            ]);
+
+
+            var chart = new google.visualization.LineChart(document.getElementById('totalexpense'));
+            chart.draw(data, options);
+        }
+
+        function drawProfitChart() {
+            // Static data for the chart
+            var data = google.visualization.arrayToDataTable([
+                ['Datetime', 'Profit'],
+                [new Date(2025, 0, 1, 9, 0), 50],  // 9:00 AM
+                [new Date(2025, 0, 1, 10, 0), 80], // 10:00 AM
+                [new Date(2025, 0, 1, 11, 0), 120], // 11:00 AM
+                [new Date(2025, 0, 1, 12, 0), 150], // 12:00 PM
+                [new Date(2025, 0, 1, 13, 0), 180], // 1:00 PM
+                [new Date(2025, 0, 1, 14, 0), 200], // 2:00 PM
+                [new Date(2025, 0, 1, 15, 0), 250]  // 3:00 PM
+            ]);
+
+            var chart = new google.visualization.LineChart(document.getElementById('totalprofit'));
+            chart.draw(data, options);
+        }
+        function drawCustomerChart() {
+            // Static data for the chart
+            var data = google.visualization.arrayToDataTable([
+                ['Datetime', 'Customers'],
+                [new Date(2025, 0, 1, 9, 0), 20],   // 9:00 AM
+                [new Date(2025, 0, 1, 10, 0), 50],  // 10:00 AM
+                [new Date(2025, 0, 1, 11, 0), 80],  // 11:00 AM
+                [new Date(2025, 0, 1, 12, 0), 110], // 12:00 PM
+                [new Date(2025, 0, 1, 13, 0), 140], // 1:00 PM
+                [new Date(2025, 0, 1, 14, 0), 170], // 2:00 PM
+                [new Date(2025, 0, 1, 15, 0), 200]  // 3:00 PM
+            ]);
+
+            var chart = new google.visualization.LineChart(document.getElementById('totalcustomers'));
+            chart.draw(data, options);
+        }
+
+
+
+        
+            function compereChart() {
+                var data = google.visualization.arrayToDataTable([
+                    // Column headers: X (DateTime), Sales, Profit, Expenses
+                    ["DateTime", "Sales", "Profit", "Expenses"],
+                    [new Date(2023, 0, 1, 9, 0), 1200, 300, 900],  // Jan 1, 2023, 9:00 AM
+                    [new Date(2023, 0, 1, 12, 0), 1500, 400, 1100], // Jan 1, 2023, 12:00 PM
+                    [new Date(2023, 0, 1, 15, 0), 1700, 500, 1200], // Jan 1, 2023, 3:00 PM
+                    [new Date(2023, 0, 1, 18, 0), 2000, 700, 1300], // Jan 1, 2023, 6:00 PM
+                    [new Date(2023, 0, 1, 21, 0), 2300, 900, 1400], // Jan 1, 2023, 9:00 PM
+                    [new Date(2023, 0, 2, 9, 0), 2500, 1000, 1500], // Jan 2, 2023, 9:00 AM
+                    [new Date(2023, 0, 2, 12, 0), 2700, 1200, 1500], // Jan 2, 2023, 12:00 PM
+                ]);
+
+                var options = {
+                    title: "Company Performance Over Time",
+                    backgroundColor: "rgb(36, 48, 63)",
+                    chartArea: {
+                        backgroundColor: "rgb(36, 48, 63)", // Matches theme color
+                        width: "80%",
+                        height: "70%"
+                    },
+                    hAxis: {
+                        title: "DateTime",
+                        format: "MMM dd, yyyy HH:mm", // Format the datetime axis
+                        titleTextStyle: { color: "white" },
+                        textStyle: { color: "white" },
+                        gridlines: { color: "transparent" }
+                    },
+                    vAxis: {
+                        title: "Amount",
+                        titleTextStyle: { color: "white" },
+                        textStyle: { color: "white" },
+                        gridlines: { color: "transparent" }
+                    },
+                    colors: ["#03a9f4", "#4caf50", "#ff5722"], // Blue for Sales, Green for Profit, Red for Expenses
+                    areaOpacity: 0.3, // Transparency for the filled area
+                    legend: {
+                        position: "bottom",
+                        textStyle: { color: "white" } // White legend text
+                    }
+                };
+
+                var chart5 = new google.visualization.AreaChart(
+                    document.getElementById("salesprofitexpenceCompareChart")
+                );
+                chart5.draw(data, options);
+            }
+        
+
+            function mostusedmadicineChart() {
+            var data = google.visualization.arrayToDataTable([
+                // Headers
+                ['Medicine', 'Usage Count'],
+                // Example data
+                ['Paracetamol', 1200],
+                ['Ibuprofen', 950],
+                ['Amoxicillin', 870],
+                ['Metformin', 780],
+                ['Atorvastatin', 680],
+                ['Omeprazole', 600],
+                ['Aspirin', 540],
+                ['Losartan', 500],
+                ['Azithromycin', 450],
+                ['Levothyroxine', 400]
+            ]);
+
+            var options = {
+                title: 'Most Used Medicines',
+                backgroundColor: 'rgb(36, 48, 63)',
+                titleTextStyle: { color: 'white', fontSize: 18 },
+                chartArea: { width: '70%' },
+                hAxis: {
+                    title: 'Usage Count',
+                    minValue: 0,
+                    titleTextStyle: { color: 'white' },
+                    textStyle: { color: 'white' },
+                    gridlines: { color: 'transparent' }
+                },
+                vAxis: {
+                    title: 'Medicine',
+                    titleTextStyle: { color: 'white' },
+                    textStyle: { color: 'white' }
+                },
+                legend: { position: 'none' },
+                colors: ['#4caf50'] // Green for medicines
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('mostusedmadicineChart'));
+            chart.draw(data, options);
+        }
+
+
     </script>
 
 </body>
