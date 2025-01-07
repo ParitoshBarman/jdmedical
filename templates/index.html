@@ -30,7 +30,7 @@
         }
 
         .sidebar {
-            width: 300px;
+            /* width: 300px; */
             min-height: 100vh;
             background-color: var(--theamcolorlite);
         }
@@ -64,6 +64,35 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+        }
+
+        /* Menu section */
+        .menusec{
+            padding: 30px 43px;
+            
+        }
+        .menusec>h3{
+            font-weight: 400;
+            color: rgb(138 153 175);
+            margin: 10px 0;
+        }
+        .menusec>ul{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            cursor: pointer;
+        }
+        .menusec>ul>li{
+            list-style: none;
+            padding: 15px;
+        }
+        .menusec>ul :hover{
+            background-color: rgb(82, 98, 117);
+        }
+        .menusec>ul>li a{
+            text-decoration: none;
+            color: rgb(222 228 238);
+            font-size: 16px;
         }
     </style>
 
@@ -120,7 +149,7 @@
             padding-top: 2px;
         }
 
-        .chartsection{
+        .chartsection {
             margin: 0 50px;
             display: flex;
             justify-content: space-around;
@@ -128,6 +157,7 @@
             flex-wrap: wrap;
             gap: 10px;
         }
+        
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -143,7 +173,57 @@
                 </div>
             </div>
             <div class="menusec">
-
+                <h3>Menu</h3>
+                <ul>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-th-large"></i>
+                            &nbsp;&nbsp;Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-bullhorn"></i>
+                          &nbsp;&nbsp;Announcement
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/purchase">
+                            <i class="fa fa-bank"></i>
+                          &nbsp;&nbsp;Purchase
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-bar-chart"></i>
+                          &nbsp;&nbsp;Sales
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-address-card-o"></i>
+                          &nbsp;&nbsp;Test Reports
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-edit"></i>
+                          &nbsp;&nbsp;Pending Payment
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-calendar-times-o"></i>
+                          &nbsp;&nbsp;Expired Medicine
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fa fa-gear"></i>
+                          &nbsp;&nbsp;Account Settings
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="mainSec">
@@ -198,7 +278,7 @@
                         <div class="contentbox">
                             <div>
 
-                                <i class="fa fa-money"
+                                <i class="fa fa-credit-card"
                                     style="color: var(--fontcolor);padding: 10px;background-color: rgba(255, 255, 255, 0.359);border-radius: 50%;"></i>
                             </div>
                             <div>
@@ -214,7 +294,7 @@
                         <div class="contentbox">
                             <div>
 
-                                <i class="fa fa-money"
+                                <i class="fa fa-line-chart"
                                     style="color: var(--fontcolor);padding: 10px;background-color: rgba(255, 255, 255, 0.359);border-radius: 50%;"></i>
                             </div>
                             <div>
@@ -230,7 +310,7 @@
                         <div class="contentbox">
                             <div>
 
-                                <i class="fa fa-user-circle"
+                                <i class="fa fa-group"
                                     style="color: var(--fontcolor);padding: 10px;background-color: rgba(255, 255, 255, 0.359);border-radius: 50%;"></i>
                             </div>
                             <div>
@@ -246,11 +326,13 @@
 
                 <div class="chartsection">
                     <div class="salesprofitexpenceCompare" style="min-width: 600px; width: 58%;min-height: 450px;">
-                        <div class="salesprofitexpenceCompareChart" id="salesprofitexpenceCompareChart" style="width: 100%;height: 100%;min-height: 450px;"></div>
+                        <div class="salesprofitexpenceCompareChart" id="salesprofitexpenceCompareChart"
+                            style="width: 100%;height: 100%;min-height: 450px;"></div>
                     </div>
 
                     <div class="mostusedmadicine" style="min-width: 300px;width: 40%;min-height: 450px;">
-                        <div class="mostusedmadicineChart" id="mostusedmadicineChart" style="width: 100%;height: 100%;min-height: 450px;"></div>
+                        <div class="mostusedmadicineChart" id="mostusedmadicineChart"
+                            style="width: 100%;height: 100%;min-height: 450px;"></div>
                     </div>
 
                 </div>
@@ -386,57 +468,99 @@
 
 
 
-        
-            function compereChart() {
-                var data = google.visualization.arrayToDataTable([
-                    // Column headers: X (DateTime), Sales, Profit, Expenses
-                    ["DateTime", "Sales", "Profit", "Expenses"],
-                    [new Date(2023, 0, 1, 9, 0), 1200, 300, 900],  // Jan 1, 2023, 9:00 AM
-                    [new Date(2023, 0, 1, 12, 0), 1500, 400, 1100], // Jan 1, 2023, 12:00 PM
-                    [new Date(2023, 0, 1, 15, 0), 1700, 500, 1200], // Jan 1, 2023, 3:00 PM
-                    [new Date(2023, 0, 1, 18, 0), 2000, 700, 1300], // Jan 1, 2023, 6:00 PM
-                    [new Date(2023, 0, 1, 21, 0), 2300, 900, 1400], // Jan 1, 2023, 9:00 PM
-                    [new Date(2023, 0, 2, 9, 0), 2500, 1000, 1500], // Jan 2, 2023, 9:00 AM
-                    [new Date(2023, 0, 2, 12, 0), 2700, 1200, 1500], // Jan 2, 2023, 12:00 PM
-                ]);
 
-                var options = {
-                    title: "Company Performance Over Time",
-                    backgroundColor: "rgb(36, 48, 63)",
-                    chartArea: {
-                        backgroundColor: "rgb(36, 48, 63)", // Matches theme color
-                        width: "80%",
-                        height: "70%"
-                    },
-                    hAxis: {
-                        title: "DateTime",
-                        format: "MMM dd, yyyy HH:mm", // Format the datetime axis
-                        titleTextStyle: { color: "white" },
-                        textStyle: { color: "white" },
-                        gridlines: { color: "transparent" }
-                    },
-                    vAxis: {
-                        title: "Amount",
-                        titleTextStyle: { color: "white" },
-                        textStyle: { color: "white" },
-                        gridlines: { color: "transparent" }
-                    },
-                    colors: ["#03a9f4", "#4caf50", "#ff5722"], // Blue for Sales, Green for Profit, Red for Expenses
-                    areaOpacity: 0.3, // Transparency for the filled area
-                    legend: {
-                        position: "bottom",
-                        textStyle: { color: "white" } // White legend text
-                    }
-                };
+        function compereChart() {
+            var data = google.visualization.arrayToDataTable([
+    // Column headers: X (DateTime), Sales, Profit, Expenses
+    ["DateTime", "Sales", "Profit", "Expenses"],
+    [new Date(2023, 0, 1, 0, 0), 1200, 300, 800],
+    [new Date(2023, 0, 1, 3, 0), 1100, 200, 900],
+    [new Date(2023, 0, 1, 6, 0), 1400, 400, 700],
+    [new Date(2023, 0, 1, 9, 0), 1600, 500, 1100],
+    [new Date(2023, 0, 1, 12, 0), 1500, 450, 1000],
+    [new Date(2023, 0, 1, 15, 0), 1800, 600, 1200],
+    [new Date(2023, 0, 1, 18, 0), 1700, 550, 1300],
+    [new Date(2023, 0, 1, 21, 0), 2000, 700, 1400],
+    [new Date(2023, 0, 2, 0, 0), 1900, 650, 1500],
+    [new Date(2023, 0, 2, 3, 0), 2100, 750, 1300],
+    [new Date(2023, 0, 2, 6, 0), 2000, 700, 1400],
+    [new Date(2023, 0, 2, 9, 0), 2300, 800, 1700],
+    [new Date(2023, 0, 2, 12, 0), 2200, 850, 1600],
+    [new Date(2023, 0, 2, 15, 0), 2500, 1000, 1800],
+    [new Date(2023, 0, 2, 18, 0), 2400, 950, 1700],
+    [new Date(2023, 0, 2, 21, 0), 2700, 1100, 1900],
+    [new Date(2023, 0, 3, 0, 0), 2600, 1050, 1800],
+    [new Date(2023, 0, 3, 3, 0), 2800, 1200, 2000],
+    [new Date(2023, 0, 3, 6, 0), 3000, 1300, 2100],
+    [new Date(2023, 0, 3, 9, 0), 3100, 1250, 2200],
+    [new Date(2023, 0, 3, 12, 0), 2900, 1100, 2000],
+    [new Date(2023, 0, 3, 15, 0), 3200, 1400, 2300],
+    [new Date(2023, 0, 3, 18, 0), 3300, 1350, 2400],
+    [new Date(2023, 0, 3, 21, 0), 3500, 1500, 2500],
+    [new Date(2023, 0, 4, 0, 0), 3400, 1450, 2400],
+    [new Date(2023, 0, 4, 3, 0), 3600, 1600, 2600],
+    [new Date(2023, 0, 4, 6, 0), 3700, 1650, 2700],
+    [new Date(2023, 0, 4, 9, 0), 3900, 1800, 2900],
+    [new Date(2023, 0, 4, 12, 0), 3800, 1750, 2800],
+    [new Date(2023, 0, 4, 15, 0), 4000, 1900, 3000],
+    [new Date(2023, 0, 4, 18, 0), 4100, 1850, 3100],
+    [new Date(2023, 0, 4, 21, 0), 4300, 2000, 3300],
+    [new Date(2023, 0, 5, 0, 0), 4200, 1950, 3200],
+    [new Date(2023, 0, 5, 3, 0), 4400, 2100, 3400],
+    [new Date(2023, 0, 5, 6, 0), 4500, 2150, 3500],
+    [new Date(2023, 0, 5, 9, 0), 4700, 2300, 3700],
+    [new Date(2023, 0, 5, 12, 0), 4600, 2250, 3600],
+    [new Date(2023, 0, 5, 15, 0), 4800, 2400, 3800],
+    [new Date(2023, 0, 5, 18, 0), 4900, 2350, 3900],
+    [new Date(2023, 0, 5, 21, 0), 5100, 2500, 4100],
+    [new Date(2023, 0, 6, 0, 0), 5000, 2450, 4000],
+    [new Date(2023, 0, 6, 3, 0), 5200, 2600, 4200],
+    [new Date(2023, 0, 6, 6, 0), 5300, 2650, 4300],
+    [new Date(2023, 0, 6, 9, 0), 5500, 2800, 4500],
+    [new Date(2023, 0, 6, 12, 0), 5400, 2750, 4400],
+    [new Date(2023, 0, 6, 15, 0), 5600, 2900, 4600],
+    [new Date(2023, 0, 6, 18, 0), 5700, 2850, 4700],
+    [new Date(2023, 0, 6, 21, 0), 5900, 3000, 4900],
+]);
 
-                var chart5 = new google.visualization.AreaChart(
-                    document.getElementById("salesprofitexpenceCompareChart")
-                );
-                chart5.draw(data, options);
-            }
-        
 
-            function mostusedmadicineChart() {
+            var options = {
+                title: "Company Performance Over Time",
+                backgroundColor: "rgb(36, 48, 63)",
+                chartArea: {
+                    backgroundColor: "rgb(36, 48, 63)", // Matches theme color
+                    width: "80%",
+                    height: "70%"
+                },
+                hAxis: {
+                    title: "DateTime",
+                    format: "MMM dd, yyyy HH:mm", // Format the datetime axis
+                    titleTextStyle: { color: "white" },
+                    textStyle: { color: "white" },
+                    gridlines: { color: "transparent" }
+                },
+                vAxis: {
+                    title: "Amount",
+                    titleTextStyle: { color: "white" },
+                    textStyle: { color: "white" },
+                    gridlines: { color: "transparent" }
+                },
+                colors: ["#03a9f4", "#4caf50", "#ff5722"], // Blue for Sales, Green for Profit, Red for Expenses
+                areaOpacity: 0.3, // Transparency for the filled area
+                legend: {
+                    position: "bottom",
+                    textStyle: { color: "white" } // White legend text
+                }
+            };
+
+            var chart5 = new google.visualization.AreaChart(
+                document.getElementById("salesprofitexpenceCompareChart")
+            );
+            chart5.draw(data, options);
+        }
+
+
+        function mostusedmadicineChart() {
             var data = google.visualization.arrayToDataTable([
                 // Headers
                 ['Medicine', 'Usage Count'],

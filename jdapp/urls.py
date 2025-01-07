@@ -20,5 +20,6 @@ from jdapp import views
 
 urlpatterns = urlpatterns = [
     path("", views.index, name='home'),
+    path("purchase", views.purchase, name='purchase'),
     path("test", views.test, name='test')
 ]
