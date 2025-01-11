@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,150 +6,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Screen</title>
-    <style>
-        :root {
-            --theamcolor: rgb(26, 34, 44);
-            --theamcolorlite: rgb(36, 48, 63);
-            --fontcolor: rgb(255, 255, 255);
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: var(--fontcolor);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background: var(--theamcolorlite);
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            color: var(--fontcolor);
-        }
-
-        .header h1 {
-            font-size: 24px;
-        }
-
-        .form-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            width: 150px;
-            font-weight: bold;
-            color: var(--fontcolor);
-        }
-
-        .form-group input,
-        .form-group select {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background: var(--theamcolorlite);
-            color: var(--fontcolor);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ddd;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-            color: var(--fontcolor);
-        }
-
-        th {
-            background-color: var(--theamcolor);
-        }
-
-        .footer {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .footer button {
-            padding: 10px 20px;
-            background-color: var(--theamcolor);
-            color: var(--fontcolor);
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .footer button:hover {
-            background-color: rgb(44, 58, 77);
-        }
-    </style>
+    <link rel="stylesheet" href='{% static "css/styles.css" %}'>
+    <link rel="stylesheet" href='{% static "css/purchase.css" %}'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Purchase Invoice</h1>
-            <p><strong>Date:</strong> <input type="date" id="dateInput"></p>
-        </div>
+    <main>
+        {% include "sidebar.html" %}
+        <div class="mainSec">
+            <div class="container">
+                <div class="header">
+                    <h1>Purchase Invoice</h1>
+                    <p><strong>Date:</strong> <input type="date" id="dateInput"></p>
+                </div>
 
-        <form>
-            <div class="form-group">
-                <label for="party">Party Name:</label>
-                <input type="text" id="party" placeholder="Enter Party Name" value="M.M DISTRIBUTORS">
+                <form>
+                    <div class="form-group">
+                        <label for="party">Party Name:</label>
+                        <input type="text" id="party" placeholder="Enter Party Name" value="M.M DISTRIBUTORS">
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice">Invoice No:</label>
+                        <input type="text" id="invoice" placeholder="Enter Invoice Number" value="4857">
+                    </div>
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Company</th>
+                            <th>Item Name</th>
+                            <th>Batch</th>
+                            <th>Exp. Date</th>
+                            <th>MRP</th>
+                            <th>Rate</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemTable">
+                        <!-- Rows will be dynamically added here -->
+                    </tbody>
+                </table>
+
+                <div class="footer">
+                    <button type="button" onclick="addRow()">Add Item</button>
+                    <button type="button">Save Invoice</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="invoice">Invoice No:</label>
-                <input type="text" id="invoice" placeholder="Enter Invoice Number" value="4857">
-            </div>
-        </form>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>Company</th>
-                    <th>Item Name</th>
-                    <th>Batch</th>
-                    <th>Exp. Date</th>
-                    <th>MRP</th>
-                    <th>Rate</th>
-                    <th>Qty</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody id="itemTable">
-                <!-- Rows will be dynamically added here -->
-            </tbody>
-        </table>
-
-        <div class="footer">
-            <button type="button" onclick="addRow()">Add Item</button>
-            <button type="button">Save Invoice</button>
         </div>
-    </div>
+    </main>
 
     <script>
         let rowCount = 1;

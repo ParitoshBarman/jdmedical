@@ -6,255 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JD Medical</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --theamcolor: rgb(26 34 44);
-            --theamcolorlite: rgb(36 48 63);
-            --fontcolor: rgb(255 255 255);
-        }
-
-        body {
-            background-color: var(--theamcolor);
-            color: var(--fontcolor);
-            font-family: sans-serif;
-        }
-
-        main {
-            width: 100%;
-            display: flex;
-        }
-
-        .sidebar {
-            /* width: 300px; */
-            min-height: 100vh;
-            background-color: var(--theamcolorlite);
-        }
-
-        .mainSec {
-            width: calc(100% - 302px);
-        }
-
-        .mainSec>header {
-            width: 100%;
-            background-color: var(--theamcolorlite);
-            min-height: 80px;
-            /* position: fixed; */
-        }
-
-        .logosec>div {
-            width: 100%;
-            min-height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logosec>div>img {
-            border-radius: 50%;
-            max-width: 53px;
-        }
-
-        .mainSec>header {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        /* Menu section */
-        .menusec{
-            padding: 30px 43px;
-            
-        }
-        .menusec>h3{
-            font-weight: 400;
-            color: rgb(138 153 175);
-            margin: 10px 0;
-        }
-        .menusec>ul{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            cursor: pointer;
-        }
-        .menusec>ul>li{
-            list-style: none;
-            padding: 15px;
-        }
-        .menusec>ul :hover{
-            background-color: rgb(82, 98, 117);
-        }
-        .menusec>ul>li a{
-            text-decoration: none;
-            color: rgb(222 228 238);
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href='{% static "css/styles.css" %}'>
+    <link rel="stylesheet" href='{% static "css/chartsStyles.css" %}'>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <style>
-        .quicktrackingsec {
-            padding: 50px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .quicktrackingsec>.quicktrackingcart {
-            width: 250px;
-            height: 150px;
-            /* border: 1px solid green; */
-
-        }
-
-        .quicktrackingsec>.quicktrackingcart>.totalsalse {
-            width: 250px;
-            height: 150px;
-            border-radius: 10px;
-        }
-
-        .quicktrackingsec>.quicktrackingcart>.contentbox {
-            /* transform: translate(102px, -121px); */
-            height: 100%;
-            position: relative;
-            top: -150px;
-            left: 0px;
-            /* border: 1px solid red; */
-            border: 1px solid #e5e7eb;
-            z-index: 5;
-            padding-left: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            border-radius: 10px;
-        }
-
-        .quicktrackingsec>.quicktrackingcart>.contentbox>div>h3 {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .quicktrackingsec>.quicktrackingcart>.contentbox>div>p {
-            color: #AEB7C0;
-            font-size: 14px;
-            font-weight: 500;
-            padding-top: 2px;
-        }
-
-        .chartsection {
-            margin: 0 50px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-    </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <main>
-        <div class="sidebar">
-            <div class="logosec">
-                <div>
-                    <img src='{% static "img/logo.jpeg" %}' alt="">
-                    <h1>JD Medical</h1>
-                </div>
-            </div>
-            <div class="menusec">
-                <h3>Menu</h3>
-                <ul>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-th-large"></i>
-                            &nbsp;&nbsp;Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-bullhorn"></i>
-                          &nbsp;&nbsp;Announcement
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/purchase">
-                            <i class="fa fa-bank"></i>
-                          &nbsp;&nbsp;Purchase
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-bar-chart"></i>
-                          &nbsp;&nbsp;Sales
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-address-card-o"></i>
-                          &nbsp;&nbsp;Test Reports
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-edit"></i>
-                          &nbsp;&nbsp;Pending Payment
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-calendar-times-o"></i>
-                          &nbsp;&nbsp;Expired Medicine
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                            <i class="fa fa-gear"></i>
-                          &nbsp;&nbsp;Account Settings
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        {% include "sidebar.html" %}
         <div class="mainSec">
-            <header>
-                <label for="filterInput">Show Data
-                    <select name="filterInput" id="filterInput">
-                        <option value="last24">Last 24 Hours</option>
-                        <option value="today">Today</option>
-                        <option value="yesterday">Yesterday</option>
-                        <option value="thisweek">This Week</option>
-                        <option value="thismonth">This month</option>
-                        <option value="thisyear">This Year</option>
-                        <option value="lifetime">Life Time</option>
-                    </select>
-                </label>
-
-                <div>
-                    <p>Choose Range</p>
-                    <div>
-                        <label for="fromrngdate">From
-                            <input type="date" name="fromrngdate" id="fromrngdate">
-                        </label>
-                        <label for="torngdate">To
-                            <input type="date" name="torngdate" id="torngdate">
-                        </label>
-                    </div>
-                </div>
-                <div class="headerchildren">
-                    <h2>JD Medical Dashboard</h2>
-                </div>
-            </header>
+            {% include "header.html" %}
+            
             <div class="chartSec">
                 <div class="quicktrackingsec">
                     <div class="quicktrackingcart">
@@ -526,6 +291,7 @@
 
             var options = {
                 title: "Company Performance Over Time",
+                titleTextStyle: { color: "white" },
                 backgroundColor: "rgb(36, 48, 63)",
                 chartArea: {
                     backgroundColor: "rgb(36, 48, 63)", // Matches theme color

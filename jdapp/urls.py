@@ -21,5 +21,17 @@ from jdapp import views
 urlpatterns = urlpatterns = [
     path("", views.index, name='home'),
     path("purchase", views.purchase, name='purchase'),
+    path("sales", views.sales, name='sales'),
+    path("stock", views.stock, name='stock'),
+    path("expiredmedicine", views.expiredmedicine, name='expiredmedicine'),
+    path("mycustomers", views.mycustomers, name='mycustomers'),
+    path("pendingpayments", views.pendingpayments, name='pendingpayments'),
+    path("mybills", views.mybills, name='mybills'),
+    path("testreports", views.testreports, name='testreports'),
+    path("announcement", views.announcement, name='announcement'),
+    path("accountsettings", views.accountsettings, name='accountsettings'),
+    path("login", views.login, name='login'),
+    path("createaccount", views.createaccount, name='createaccount'),
+    path("forgotpassword", views.forgotpassword, name='forgotpassword'),
     path("test", views.test, name='test')
 ]
