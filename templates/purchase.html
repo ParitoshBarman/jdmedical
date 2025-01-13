@@ -337,6 +337,7 @@
 
                     if (response.ok) {
                         parties.push({ fields: { name, contact_number, email, gst_number, address }, pk: result.party_id });
+                        autoFillParty();
                         alert(result.message);
                     } else {
                         console.error('Error adding party:', result);
@@ -498,10 +499,11 @@
 
         renderTable()
 
+        function autoFillParty(){
         let partyTableRow = document.querySelectorAll("#partyTable>tbody>tr");
         partyTableRow.forEach((row)=>{
             row.addEventListener("click", (e)=>{
-                console.log(e);
+                // console.log(e);
                 console.log(row.querySelectorAll("td")[0].textContent);
                 document.getElementById("partyuniceID").value = row.querySelectorAll("td")[0].textContent;
                 document.getElementById("party").value = row.querySelectorAll("td")[1].textContent;
@@ -509,6 +511,9 @@
                 partysection.style.display = "none";
             })
         })
+    }
+
+    autoFillParty();
     </script>
 
 </body>
