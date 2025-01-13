@@ -9,6 +9,7 @@
     --fontcolor: rgb(255 255 255);
     --warningcolor: rgb(255, 165, 0);
     --dangercolor: rgb(255, 77, 77);
+    --hovercolor:rgb(82, 98, 117);
 }
 
 body {
